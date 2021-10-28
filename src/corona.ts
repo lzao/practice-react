@@ -1,8 +1,3 @@
-/*eslint no-undef: "error"*/
-/*eslint-env node*/
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-
 import axios from 'axios';
 
 export async function getCorona() {
@@ -15,13 +10,13 @@ export async function getCorona() {
     endCreateDt: 20211022,
   };
 
-  await axios
+  const result = await axios
     .get('/openapi/service/rest/Covid19/getCovid19SidoInfStateJson', {
       params,
     })
     .then(response => {
-      const aa = JSON.stringify(response.data);
-      const bb = JSON.parse(aa);
-      console.log(bb.response.body.items.item[1]);
+      return JSON.parse(JSON.stringify(response.data)).response.body.items.item;
     });
+
+  return result;
 }
