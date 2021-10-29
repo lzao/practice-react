@@ -1,0 +1,29 @@
+name: React Run test on Pull reqest
+on:
+  pull-request:
+    branches:
+      - master # master Branch에서 push 이벤트가 일어났을 때만 실행
+
+jobs:
+  Run Jest:
+    runs-on: ubuntu-20.04
+    env: # environment setting
+      REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY: ${{secrets.REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY}}
+    steps:
+     - name: Checkout source code. # 레포지토리 체크아웃
+     uses: actions/checkout@master
+
+       - name: Cache node modules      # node modules 캐싱
+         uses: actions/cache@v1
+         with:
+           path: node_modules
+           key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+           restore-keys: |
+             ${{ runner.OS }}-build-
+             ${{ runner.OS }}-
+
+       - name: Instal Dependencies # 의존 파일 설치
+         run: npm install
+
+       - name: Test
+           run: npm run test
