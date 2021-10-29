@@ -1,13 +1,13 @@
 import axios from 'axios';
+import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from './constants';
 
 export async function getCorona() {
   const nowDate: string = getNowDate();
 
   const params = {
-    ServiceKey:
-      'So63R7Gz1oUcEF2kQgk/GqMJA7J/3GZLfmeK7UZRgarXKvOksGDtTYEFBWIyWrzTj5MpeWYn6pG9mjy8DTh84w==',
+    ServiceKey: DAILY_CORONA_STATUS_API_SERVICE_KEY,
     pageNo: 1,
-    numOfRows: 10,
+    numOfRows: 20,
     startCreateDt: nowDate,
     endCreateDt: nowDate,
   };
