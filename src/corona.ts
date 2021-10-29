@@ -1,13 +1,15 @@
 import axios from 'axios';
 
 export async function getCorona() {
+  const nowDate: string = getNowDate();
+
   const params = {
     ServiceKey:
       'So63R7Gz1oUcEF2kQgk/GqMJA7J/3GZLfmeK7UZRgarXKvOksGDtTYEFBWIyWrzTj5MpeWYn6pG9mjy8DTh84w==',
     pageNo: 1,
     numOfRows: 10,
-    startCreateDt: 20211022,
-    endCreateDt: 20211022,
+    startCreateDt: nowDate,
+    endCreateDt: nowDate,
   };
 
   const result = await axios
@@ -19,4 +21,9 @@ export async function getCorona() {
     });
 
   return result;
+}
+
+function getNowDate(): string {
+  const date = new Date();
+  return `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`;
 }
