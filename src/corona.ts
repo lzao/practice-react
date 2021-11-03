@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from './constants';
 
 export async function getCorona() {
@@ -24,6 +25,5 @@ export async function getCorona() {
 }
 
 function getNowDate(): string {
-  const date = new Date();
-  return `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`;
+  return moment().format('YYYYMMDD');
 }
