@@ -1,17 +1,14 @@
-FROM node:16
+FROM node:16-alpine
 
 LABEL maintainer="lzao@naver.com"
 
-RUN apt-get clean && apt-get update && apt-get install -y locales lsof
+# TimeZone setting
+RUN apk --no-cache add tzdata && \
+        cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
+        echo "Asia/Seoul" > /etc/timezone
 
-RUN locale-gen ko_KR.UTF-8
-ENV LANG ko_KR.UTF-8
-ENV LANGUAGE ko_KR.UTF-8
-ENV LC_ALL ko_KR.UTF-8
-
-# TimeZone 설정
-ENV TZ Asia/Seoul
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# etc package install
+RUN apk --no-cache add lsof
 
 WORKDIR /app
 COPY package*.json .
