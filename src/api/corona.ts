@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from './constants';
+import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from '../constants';
 
 export async function getCorona() {
   const nowDate: string = getNowDate();

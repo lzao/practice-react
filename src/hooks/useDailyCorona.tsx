@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getCorona} from "../corona";
+import {getCorona} from "../api/corona";
 
 interface coronaApiPros {
   createDt: string // 조회 시작 시간
