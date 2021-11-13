@@ -1,0 +1,18 @@
+name: React build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@master
+
+      - name: Instal Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
