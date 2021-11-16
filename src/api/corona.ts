@@ -1,8 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
 import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from '../constants';
+import coronaApiProps from '../interfaces/coronaApiProps.interface';
 
-export async function getCorona() {
+export async function getCorona(): Promise<coronaApiProps[]> {
   const nowDate: string = getNowDate();
 
   const params = {

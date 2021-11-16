@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -11,7 +12,6 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
-    "@types/react-bootstrap": "^0.32.28",
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.15",
     "axios": "^0.23.0",
@@ -21,7 +21,6 @@
     "http-proxy-middleware": "^2.0.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.0.1",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.3",
@@ -33,7 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-cov" : "react-scripts test -- --coverage",
+    "test-cov": "react-scripts test -- --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -55,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@types/material-ui": "^0.21.12",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "eslint": "^7.32.0",
