@@ -1,20 +1,22 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import Province from './Province';
-import handlers from '../mocks/handlers';
-import {setupServer} from 'msw/node';
+import {taskErrorHandler} from '../mocks/handlers';
+import server from '../setupTests';
 
-describe('Province', () => {
-  const server = setupServer(...handlers);
-  // 테스트 시작 전에 서버를 실행한다.
-  beforeAll(() => server.listen());
-
-  // 테스트가 끝날 때마다 리퀘스트 핸들러를 초기화하여 서로 영향을 미치지 않도록 한다.
-  afterEach(() => server.resetHandlers());
-
-  // 테스트가 완료되면 서버를 종료한다.
-  afterAll(() => server.close());
-  it('aaaa', () => {
-    server.use();
+test('일일 코로나 현황 검역의 확진자수가 6363 입니다.', async () => {
+  render(<Province />);
+  const displayed = await waitFor(() => screen.getByText('6,363'), {
+    timeout: 500,
   });
+  expect(displayed).toBeInTheDocument();
+});
+
+test('일일 코로나 현황의 데이터가 없으면 empty. 를 노출합니다.', async () => {
+  server.use(taskErrorHandler);
+  render(<Province />);
+  const displayed = await waitFor(() => screen.getByText('empty.'), {
+    timeout: 500,
+  });
+  expect(displayed).toBeInTheDocument();
 });
