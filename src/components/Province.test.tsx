@@ -1,9 +1,22 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import Province from './Province';
+import {taskErrorHandler} from '../mocks/handlers';
+import server from '../setupTests';
 
-describe('Province', () => {
-  it('aaaa', () => {
-    console.log('abc');
+test('일일 코로나 현황 검역의 확진자수가 6363 입니다.', async () => {
+  render(<Province />);
+  const displayed = await waitFor(() => screen.getByText('6,363'), {
+    timeout: 500,
   });
+  expect(displayed).toBeInTheDocument();
+});
+
+test('일일 코로나 현황의 데이터가 없으면 empty. 를 노출합니다.', async () => {
+  server.use(taskErrorHandler);
+  render(<Province />);
+  const displayed = await waitFor(() => screen.getByText('empty.'), {
+    timeout: 500,
+  });
+  expect(displayed).toBeInTheDocument();
 });
