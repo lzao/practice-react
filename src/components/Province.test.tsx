@@ -6,7 +6,7 @@ import server from '../setupTests';
 
 test('일일 코로나 현황 검역의 확진자수가 6363 입니다.', async () => {
   render(<Province />);
-  const displayed = await waitFor(() => screen.getByText('6,3613'), {
+  const displayed = await waitFor(() => screen.getByText('6,363'), {
     timeout: 500,
   });
   expect(displayed).toBeInTheDocument();
