@@ -48,15 +48,8 @@ jobs:
      - name: Notify Slack
        uses: 8398a7/action-slack@v3
        with:
-         status: custom
-         fields: commit,author,message
-         custom_payload: |
-           {
-             attachments: [{
-               color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-               text: `[${process.env.AS_COMMIT}]${process.env.AS_MESSAGE}\nby ${process.env.AS_AUTHOR}`,
-             }]
-           }
+         status: ${{ job.status }}
+         fields: pullRequest
        env:
          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
        if: always() # Pick up events even if the job fails or is canceled.
