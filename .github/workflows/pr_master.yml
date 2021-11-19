@@ -58,3 +58,4 @@ jobs:
              state: "merged"
            })
        if: success() # 이전 step 성공 시 pr merge
+    timeout-minutes: 5
