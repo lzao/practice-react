@@ -49,7 +49,7 @@ jobs:
        uses: 8398a7/action-slack@v3
        with:
          status: custom
-         fields: pullRequest
+         fields: job,repo,ref,author,took
          custom_payload: |
            {
              attachments: [{
