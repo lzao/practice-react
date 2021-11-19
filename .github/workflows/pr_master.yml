@@ -50,7 +50,7 @@ jobs:
        with:
          status: ${{ job.status }}
          author_name: Github Action Test
-         fields: message
+         fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
        env:
          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
        if: always() # Pick up events even if the job fails or is canceled.
