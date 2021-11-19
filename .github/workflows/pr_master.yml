@@ -27,27 +27,40 @@ jobs:
      - name: Test
        run: npm run test
      - name: if fail
-       uses: actions/github-script@v5.0.0
+       uses: actions/github-script@v4.0.2
        with:
-         github-token: ${{secrets.GITHUB_TOKEN}}
-         script: |
-           github.repos.createCommitStatus({
-             ...context.repo,
-             sha: context.eventName === 'pull_request' ? context.payload.pull_request.head.sha : context.sha,
-             state: 'closed',
-           });
-       if: failure() # 이전 step 실패 시 pr closed
-     - name: if success
-       uses: actions/github-script@v5.0.0
-       with:
-         github-token: ${{github.token}}
+         github-token: ${{ secrets.GITHUB_TOKEN }}
          script: |
            const ref = "${{github.ref}}"
            const pull_number = Number(ref.split("/")[2])
+           await github.pulls.createReview({
+             ...context.repo,
+             pull_number,
+             body:"테스트코드를 다시 확인해주세요. ",
+             event: "REQUEST_CHANGES"
+           })
            await github.pulls.update({
              ...context.repo,
              pull_number,
-             state: "merged"
+             state: "closed"
+           })
+       if: failure() # 이전 step 실패 시 pr closed
+     - name: if success
+       uses: actions/github-script@v4.0.2
+       with:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         script: |
+           const ref = "${{github.ref}}"
+           const pull_number = Number(ref.split("/")[2])
+           await github.pulls.createReview({
+             ...context.repo,
+             pull_number,
+             body:"테스트코드를 다시 확인해주세요. ",
+             event: "REQUEST_CHANGES"
+           })
+           await github.pulls.update({
+             ...context.repo,
+             pull_number,
+             state: "closed"
            })
        if: success() # 이전 step 성공 시 pr merge
-    timeout-minutes: 5
