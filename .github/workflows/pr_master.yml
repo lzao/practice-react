@@ -17,7 +17,7 @@ jobs:
        uses: actions/cache@v2
        with:
          path: node_modules
-         key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
          restore-keys: |
            ${{ runner.OS }}-
 
@@ -46,7 +46,15 @@ jobs:
            })
        if: failure() # 이전 step 실패 시 pr closed
      - name: if success
-       uses: ridedott/merge-me-action@v2
+       uses: actions/github-script@v5.0.0
        with:
-         GITHUB_TOKEN: ${{github.token}}
+         github-token: ${{github.token}}
+         script: |
+           const ref = "${{github.ref}}"
+           const pull_number = Number(ref.split("/")[2])
+           await github.pulls.update({
+             ...context.repo,
+             pull_number,
+             state: "merged"
+           })
        if: success() # 이전 step 성공 시 pr merge
