@@ -14,12 +14,11 @@ jobs:
        uses: actions/checkout@master
 
      - name: Cache node modules      # node modules 캐싱
-       uses: actions/cache@v1
+       uses: actions/cache@v2
        with:
          path: node_modules
          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
          restore-keys: |
-           ${{ runner.OS }}-build-
            ${{ runner.OS }}-
 
      - name: Instal Dependencies # 의존 파일 설치
@@ -27,7 +26,7 @@ jobs:
 
      - name: Test
        run: npm run test
-             - name: if fail
+     - name: if fail
        uses: actions/github-script@0.2.0
        with:
          github-token: ${{github.token}}
@@ -45,4 +44,4 @@ jobs:
              pull_number,
              state: "closed"
            })
-         if: failure()
+       if: failure()
