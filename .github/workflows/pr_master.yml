@@ -54,9 +54,9 @@ jobs:
            {
              attachments: [{
                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-               title: ${process.env.AS_PULLREQUEST}
-               title_link: ${process.env.AS_COMMIT}
-               author_name: By ${process.env.AS_AUTHOR}
+               title: ${process.env.AS_PULLREQUEST},
+               title_link: ${process.env.AS_COMMIT},
+               author_name: By ${process.env.AS_AUTHOR},
              }]
            }
        env:
