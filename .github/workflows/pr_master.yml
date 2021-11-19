@@ -46,5 +46,7 @@ jobs:
            })
        if: failure() # 이전 step 실패 시 pr closed
      - name: if success
-       uses: ridedott/merge-me-action@v2.8.35
+       uses: ridedott/merge-me-action@v2
+       with:
+         GITHUB_TOKEN: ${{github.token}}
        if: success() # 이전 step 성공 시 pr merge
