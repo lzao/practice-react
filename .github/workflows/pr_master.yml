@@ -45,16 +45,13 @@ jobs:
              state: "closed"
            })
        if: failure() # 이전 step 실패 시 pr closed
-     - name: if success
-       uses: actions/github-script@v4.0.2
+     - name: Notify Slack
+       uses: 8398a7/action-slack@v3
        with:
-         github-token: ${{ secrets.GITHUB_TOKEN }}
-         script: |
-           const ref = "${{github.ref}}"
-           const pull_number = Number(ref.split("/")[2])
-           await github.pulls.update({
-             ...context.repo,
-             pull_number,
-             state: "merged"
-           })
-       if: success() # 이전 step 성공 시 pr merge
+         status: ${{ job.status }}
+         author_name: Github Action Test
+         fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+       env:
+         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+       if: always() # Pick up events even if the job fails or is canceled.
+
