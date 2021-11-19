@@ -14,12 +14,11 @@ jobs:
        uses: actions/checkout@master
 
      - name: Cache node modules      # node modules 캐싱
-       uses: actions/cache@v1
+       uses: actions/cache@v2
        with:
          path: node_modules
-         key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
          restore-keys: |
-           ${{ runner.OS }}-build-
            ${{ runner.OS }}-
 
      - name: Instal Dependencies # 의존 파일 설치
@@ -27,3 +26,32 @@ jobs:
 
      - name: Test
        run: npm run test
+     - name: if fail
+       uses: actions/github-script@v4.0.2
+       with:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         script: |
+           const ref = "${{github.ref}}"
+           const pull_number = Number(ref.split("/")[2])
+           await github.pulls.createReview({
+             ...context.repo,
+             pull_number,
+             body:"테스트코드를 다시 확인해주세요. ",
+             event: "REQUEST_CHANGES"
+           })
+           await github.pulls.update({
+             ...context.repo,
+             pull_number,
+             state: "closed"
+           })
+       if: failure() # 이전 step 실패 시 pr closed
+     - name: Notify Slack
+       uses: 8398a7/action-slack@v3
+       with:
+         status: ${{ job.status }}
+         author_name: Github Action Test
+         fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+       env:
+         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+       if: always() # Pick up events even if the job fails or is canceled.
+
