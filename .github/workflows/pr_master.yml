@@ -46,20 +46,13 @@ jobs:
            })
        if: failure() # 이전 step 실패 시 pr closed
      - name: Notify Slack
-       uses: 8398a7/action-slack@v3
-       with:
-         status: custom
-         fields: message,author,job
-         custom_payload: |
-           {
-             attachments: [{
-               color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-               text: `${process.env.AS_JOB}
-               ${process.env.AS_MESSAGE}
-               by ${process.env.AS_AUTHOR}`,
-             }]
-           }
+       uses: rtCamp/action-slack-notify@v2
        env:
-         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+         SLACK_CHANNEL: general
+         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+         SLACK_MESSAGE: ${{ job.SLACK_MESSAGE }}
+         SLACK_TITLE: ${{ job.SLACK_TITLE }}
+         SLACK_USERNAME: ${{ job.SLACK_MSG_AUTHOR }}
+         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
        if: always() # Pick up events even if the job fails or is canceled.
 
