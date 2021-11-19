@@ -29,21 +29,13 @@ jobs:
      - name: if fail
        uses: actions/github-script@v5.0.0
        with:
-         github-token: ${{github.token}}
+         github-token: ${{secrets.GITHUB_TOKEN}}
          script: |
-           const ref = "${{github.ref}}"
-           const pull_number = Number(ref.split("/")[2])
-           await github.pulls.createReview({
+           github.repos.createCommitStatus({
              ...context.repo,
-             pull_number,
-             body:"테스트코드를 다시 확인해주세요. ",
-             event: "REQUEST_CHANGES"
-           })
-           await github.pulls.update({
-             ...context.repo,
-             pull_number,
-             state: "closed"
-           })
+             sha: context.eventName === 'pull_request' ? context.payload.pull_request.head.sha : context.sha,
+             state: 'closed',
+           });
        if: failure() # 이전 step 실패 시 pr closed
      - name: if success
        uses: actions/github-script@v5.0.0
