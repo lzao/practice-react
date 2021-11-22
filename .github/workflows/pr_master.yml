@@ -2,7 +2,7 @@ name: React Run test on Pull reqest
 on:
   pull_request:
     branches:
-      - master # master Branch에서 push 이벤트가 일어났을 때만 실행
+      - master # master Branch에서 push 이벤트가 일어났을 때만 실행1
 
 jobs:
   test:
