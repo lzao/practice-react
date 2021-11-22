@@ -2,7 +2,7 @@ name: React Run test on Pull reqest
 on:
   pull_request:
     branches:
-      - master # master Branch에서 push 이벤트가 일어났을 때만 실행
+      - master # master Branch에서 push 이벤트가 일어났을 때만 실행1
 
 jobs:
   test:
@@ -14,12 +14,12 @@ jobs:
        uses: actions/checkout@master
 
      - name: Cache node modules      # node modules 캐싱
-       uses: actions/cache@v2
+       uses: actions/cache@v1
        with:
          path: node_modules
-         key: ${{ runner.os }}-test-${{ hashFiles('**/package-lock.json') }}
+         key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
          restore-keys: |
-           ${{ runner.OS }}-test-
+           ${{ runner.OS }}-build-
            ${{ runner.OS }}-
 
      - name: Instal Dependencies # 의존 파일 설치
