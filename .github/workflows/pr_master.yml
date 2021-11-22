@@ -17,8 +17,9 @@ jobs:
        uses: actions/cache@v2
        with:
          path: node_modules
-         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+         key: ${{ runner.os }}-test-${{ hashFiles('**/package-lock.json') }}
          restore-keys: |
+           ${{ runner.OS }}-test-
            ${{ runner.OS }}-
 
      - name: Instal Dependencies # 의존 파일 설치
