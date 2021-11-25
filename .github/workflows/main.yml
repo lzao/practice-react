@@ -28,17 +28,11 @@ jobs:
       - name: Build # React Build
         run: CI=false npm run build
 
-      - name: Generate deployment package
-        run: cd build && zip -r deploy.zip .
-
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v10
+      - name: Notify Slack
+        uses: 8398a7/action-slack@v3
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: production-practice-react
-          environment_name: Productionpracticereact-env
-          version_label: ${{ github.run_number }}
-          use_existing_version_if_available: true
-          region: ap-northeast-2
-          deployment_package: build/deploy.zip
+          status: ${{ job.status }}
+          fields: commit, message
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always() # Pick up events even if the job fails or is canceled.
