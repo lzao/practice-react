@@ -2,10 +2,10 @@
 대한민국의 일별 코로나 현황을 보여줍니다.
 
 ## 사전작업
-###1. Docker machine 설치
+### 1. Docker machine 설치
 ###### for mac https://hub.docker.com/editions/community/docker-ce-desktop-mac   
 ###### for window https://www.docker.com/products/docker-desktop
-###2. Git Repository 내려받기
+### 2. Git Repository 내려받기
 본 프로젝트 코드를 로컬에 다운로드합니다.(or clone)
 
 ## 환경세팅
