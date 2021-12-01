@@ -20,7 +20,7 @@ CLI 기준으로 설명합니다.
 ```
 
 ## 개발환경 세팅
-https://www.notion.so/monssosa/549d6b33cf984153aadb2a5e5ce25727
+https://monssosa.notion.site/VSCode-9874244804ed4e86993e4250fd7f46db
 
 ## 실행화면
 http://localhost:3000 으로 접속하여 아래 화면이 나오는 지 확인합니다.
