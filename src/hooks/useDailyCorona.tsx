@@ -1,10 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import coronaApiProps from '../interfaces/coronaApiProps.interface';
 import axios from "axios";
 import moment from "moment";
 import {DAILY_CORONA_STATUS_API_SERVICE_KEY} from "../constants";
 
 export default function useDailyCorona(): coronaApiProps[] | undefined {
+  const isCancelled = useRef(false);
   const [items, setItems] = useState<coronaApiProps[]>();
 
   const params = setParams();
@@ -15,18 +16,17 @@ export default function useDailyCorona(): coronaApiProps[] | undefined {
         params,
       })
       .then(response => {
-        setItems(JSON.parse(JSON.stringify(response.data)).response.body.items.item);
+        if (!isCancelled.current) {
+          setItems(JSON.parse(JSON.stringify(response.data)).response.body.items.item);
+        }
       });
   }
 
   useEffect(() => {
-    let isLoading = true;
-    if (isLoading) {
-      setCorona();
-    }
+    setCorona();
     return () => {
-      isLoading = false;
-    }
+      isCancelled.current = true;
+    };
   }, []);
 
   return items;
