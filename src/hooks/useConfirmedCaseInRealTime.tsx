@@ -1,10 +1,10 @@
 import axios from "axios";
-import realTimeConfirmedCase from "interfaces/realTimeConfirmedCase";
+import realTimeConfirmedCase from "interfaces/realTimeConfirmedCase.interface";
 import { useEffect, useRef, useState } from "react";
 
-export default function useConfirmedCaseInRealTime(): realTimeConfirmedCase[]|undefined {
+export default function useConfirmedCaseInRealTime(): realTimeConfirmedCase[] {
   const isCalled = useRef(false);
-  const [items, setItems] = useState<realTimeConfirmedCase[]>();
+  const [items, setItems] = useState<realTimeConfirmedCase[]>([]);
 
   async function getRealTimeConfirmedCaseList() {
     await axios.get<realTimeConfirmedCase[]>('/openapi/test').then(response => {
@@ -19,7 +19,7 @@ export default function useConfirmedCaseInRealTime(): realTimeConfirmedCase[]|un
     return () => {
       isCalled.current = true;
     }
-  });
+  }, []);
 
   return items;
 }
