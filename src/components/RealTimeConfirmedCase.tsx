@@ -1,13 +1,6 @@
-import axios from 'axios';
-import React, {ReactElement, useEffect, useRef, useState} from 'react';
-import styled, { keyframes } from 'styled-components';
-
-interface realTimeConfirmedCase {
-  id: number
-  time: string
-  province: string
-  confirmedCaseCount: number
-}
+import useConfirmedCaseInRealTime from 'hooks/useConfirmedCaseInRealTime';
+import React, {ReactElement} from 'react';
+import styled, {keyframes} from 'styled-components';
 
 const BoxFadeIn = keyframes`
   from {
@@ -27,7 +20,7 @@ const Container = styled.ul`
   margin-bottom: 3em;
   background: linear-gradient(180deg, #f7f7f7, transparent);
   font-size: 0.75em;
-` 
+`;
 
 const ListContainer = styled.li`
   display: flex;
@@ -55,32 +48,15 @@ const MoreNotifyButton = styled.svg`
   height: 1.3em;
 `;
 
-
 export default function RealTimeConfirmedCase(): ReactElement {
-  const isCalled = useRef(false);
-  const [items, setItems] = useState<realTimeConfirmedCase[]>([]);
-
-  async function getRealTimeConfirmedCaseList() {
-    await axios.get<realTimeConfirmedCase[]>('/openapi/test').then(response => {
-      if (!isCalled.current) {
-        setItems(response.data)
-      }
-    });
-  }
-
-  useEffect(() => {
-    getRealTimeConfirmedCaseList();
-    return () => {
-      isCalled.current = true;
-    };
-  }, []);
+  const items = useConfirmedCaseInRealTime();
 
   return (
     <Container>
       {!items ? (
         <div>확진된 사람이 없습니다.</div>
       ) : (
-        items.map((item) => (
+        items.map(item => (
           <ListContainer key={item.id} role="slick-realtime">
             <TimeContainer>
               <BellIcon viewBox="0 0 24 24">
@@ -93,9 +69,9 @@ export default function RealTimeConfirmedCase(): ReactElement {
               <strong>{item.province}</strong> {item.confirmedCaseCount}명 추가 확진
             </div>
             <div>
-            <MoreNotifyButton viewBox="0 0 250 250">
-              <path d="M38.399,76.8c1.637,0,3.274,0.625,4.524,1.875l85.075,85.076l85.075-85.076c2.5-2.5,6.55-2.5,9.05,0s2.5,6.55,0,9.05  l-89.6,89.601c-2.5,2.5-6.551,2.5-9.051,0l-89.6-89.601c-2.5-2.5-2.5-6.55,0-9.05C35.124,77.425,36.762,76.8,38.399,76.8z" />
-            </MoreNotifyButton>
+              <MoreNotifyButton viewBox="0 0 250 250">
+                <path d="M38.399,76.8c1.637,0,3.274,0.625,4.524,1.875l85.075,85.076l85.075-85.076c2.5-2.5,6.55-2.5,9.05,0s2.5,6.55,0,9.05  l-89.6,89.601c-2.5,2.5-6.551,2.5-9.051,0l-89.6-89.601c-2.5-2.5-2.5-6.55,0-9.05C35.124,77.425,36.762,76.8,38.399,76.8z" />
+              </MoreNotifyButton>
             </div>
           </ListContainer>
         ))

@@ -3,8 +3,9 @@ import server from '../setupTests';
 import {taskRealTimeConfirmedCase, taskRealTimeConfirmedCaseEmpty} from '../mocks/handlers';
 import {render, screen, waitFor} from '@testing-library/react';
 import RealTimeConfirmedCase from './RealTimeConfirmedCase';
+import realTimeConfirmedCase from 'interfaces/realTimeConfirmedCase';
 
-const mockConfirmedCaseList = [
+const mockConfirmedCaseList: realTimeConfirmedCase[] = [
   {
     id: 1,
     time: '2시간전',
