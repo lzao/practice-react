@@ -36,10 +36,20 @@ test('코로나 확진자가 없을 경우 "확진된 사람이 없습니다." �
   expect(displayed).toBeInTheDocument();
 });
 
-test('코로나 확진자가 있을 경우 확진된 지역 수 만큼 리스트로 노출됩니다.', async () => {
+test('실시간 코로나 확진자 수의 알람이 있을 경우 하나씩 알람 내용을 보여줍니다.', async () => {
   server.use(taskRealTimeConfirmedCase);
   render(<RealTimeConfirmedCase />);
 
-  const list = await screen.findAllByRole('slick-realtime');
-  expect(list).toHaveLength(mockConfirmedCaseList.length);
+  const mockConfirmedCaseListCount = mockConfirmedCaseList.length;
+  for (let index = 0; index < mockConfirmedCaseListCount; index++) {
+    await waitFor(
+      () => {
+        const displayed = screen.getByText(mockConfirmedCaseList[index].province);
+        expect(displayed).toBeInTheDocument();
+      },
+      {
+        timeout: 2000,
+      },
+    );
+  }
 });
