@@ -33,7 +33,7 @@ export default function RealTimeConfirmedCase(): ReactElement {
         <div>확진된 사람이 없습니다.</div>
       ) : (
         items.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} role="slick-realtime">
             <p>시간: {item.time}</p>
             <p>지역: {item.province}</p>
             <p>확진자수: {item.confirmedCaseCount}</p>

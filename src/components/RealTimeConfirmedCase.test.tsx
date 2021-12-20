@@ -1,6 +1,6 @@
 import React from 'react';
 import server from '../setupTests';
-import {taskRealTimeConfirmedCaseEmpty} from '../mocks/handlers';
+import {taskRealTimeConfirmedCase, taskRealTimeConfirmedCaseEmpty} from '../mocks/handlers';
 import {render, screen, waitFor} from '@testing-library/react';
 import RealTimeConfirmedCase from './RealTimeConfirmedCase';
 
@@ -33,4 +33,12 @@ test('코로나 확진자가 없을 경우 "확진된 사람이 없습니다." �
     timeout: 500,
   });
   expect(displayed).toBeInTheDocument();
+});
+
+test('코로나 확진자가 있을 경우 확진된 지역 수 만큼 리스트로 노출됩니다.', async () => {
+  server.use(taskRealTimeConfirmedCase);
+  render(<RealTimeConfirmedCase />);
+
+  const list = await screen.findAllByRole('slick-realtime');
+  expect(list).toHaveLength(mockConfirmedCaseList.length);
 });
