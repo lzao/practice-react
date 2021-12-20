@@ -364,4 +364,34 @@ export const taskErrorHandler = rest.get('/openapi/service/rest/Covid19/getCovid
   );
 });
 
-export const handlers = [taskHandler];
+export const taskRealTimeConfirmedCase = rest.get('/openapi/test', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json([
+      {
+        id: 1,
+        time: '2시간전',
+        province: '충북 제천',
+        confirmedCaseCount: 22,
+      },
+      {
+        id: 2,
+        time: '3시간전',
+        province: '서울 강남',
+        confirmedCaseCount: 30,
+      },
+      {
+        id: 3,
+        time: '4시간전',
+        province: '강원 강릉',
+        confirmedCaseCount: 5,
+      },
+    ]),
+  );
+});
+
+export const taskRealTimeConfirmedCaseEmpty = rest.get('/openapi/test', (req, res, ctx) => {
+  return res(ctx.status(200), ctx.json(null));
+});
+
+export const handlers = [taskHandler, taskRealTimeConfirmedCase];
