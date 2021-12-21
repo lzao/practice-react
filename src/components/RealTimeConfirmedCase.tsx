@@ -5,11 +5,12 @@ import styled, {keyframes} from 'styled-components';
 
 const BoxFadeIn = keyframes`
   from {
-      transform: translate3d(0,10px,0)
+    transform: translate3d(0,10px,0);
+    opacity:0
   }
   to {
-      transform: translate3d(0,0,0);
-      opacity: 1
+    transform: translate3d(0,0,0);
+    opacity: 1
   }
 `;
 
@@ -27,7 +28,7 @@ const ListContainer = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: 350ms ease 0s 1 ${BoxFadeIn};
+  animation: 350ms ease ${BoxFadeIn};
 `;
 
 const TimeContainer = styled.div`
@@ -67,7 +68,7 @@ export default function RealTimeConfirmedCase(): ReactElement {
           confirmedCaseList.current += 1;
         }
         setItem(items[confirmedCaseList.current]);
-      }, 2000);
+      }, 3000);
   
       return(() => {
         isCalled.current = true;
