@@ -8,7 +8,7 @@ const StyledTableHeadRow = styled(TableRow)`
 `;
 
 const StyledTableHeadCell = styled(TableCell)`
-  color: #ffffff;
+  color: #ffffff !important;
 `;
 
 export default function Province(): ReactElement {
