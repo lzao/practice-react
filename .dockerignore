@@ -1,1 +1,25 @@
+## .idea
+.idea
+
+## git
+.git
+.gitignore
+READEME.md
+.github
+
+## Mac
+.DS_Store
+
+## docker
+docker
+./dockerignore
+Dockerfile.app.prod
+Dockerfile.dev
+docker-compose.yml
+
+## node
 node_modules
+coverage
+
+## env
+.env.exmaple

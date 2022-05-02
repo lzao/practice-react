@@ -1,0 +1,16 @@
+version: '3'
+services:
+  nest:
+    image: lzao/daily-corona-status-api:1.0.0
+    container_name: nest
+    ports:
+      - 3000:3000
+    tty: true
+  proxy:
+    image: nginx:latest
+    container_name: proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/proxy/nginx.conf:/etc/nginx/nginx.conf
+    tty: true
