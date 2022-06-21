@@ -6,9 +6,14 @@ const {createProxyMiddleware} = require('http-proxy-middleware');
 
 module.exports = app => {
   app.use(
-    '/openapi',
+    // '/openapi',
+    // createProxyMiddleware({
+    //   target: 'http://openapi.data.go.kr',
+    //   changeOrigin: true,
+    // }),
+    '/region',
     createProxyMiddleware({
-      target: 'http://openapi.data.go.kr',
+      target: `http://${process.env.REACT_APP_API_DOMAIN}`,
       changeOrigin: true,
     }),
   );

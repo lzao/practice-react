@@ -7,7 +7,7 @@ export default function useConfirmedCaseInRealTime(): realTimeConfirmedCase[] {
   const [items, setItems] = useState<realTimeConfirmedCase[]>([]);
 
   async function getRealTimeConfirmedCaseList() {
-    await axios.get<realTimeConfirmedCase[]>('/openapi/test').then(response => {
+    await axios.get<realTimeConfirmedCase[]>('/region/real').then(response => {
       if (!isCalled.current) {
         setItems(response.data)
       }

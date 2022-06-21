@@ -12,7 +12,7 @@ export default function useDailyCorona(): coronaApiProps[] | undefined {
 
   async function setCorona() {
     await axios
-      .get('/openapi/service/rest/Covid19/getCovid19SidoInfStateJson', {
+      .get('/region/province', {
         params,
       })
       .then(response => {
