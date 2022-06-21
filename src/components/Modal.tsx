@@ -1,7 +1,7 @@
 import modalHeader from 'interfaces/modalHeader.interface';
 import modalItems from 'interfaces/modalItems.interface';
 import {DAILY_CONFIREMD_CITY} from '../constants';
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {getDiffDay} from 'utils/common';
 
@@ -13,6 +13,12 @@ type props = {
 };
 
 const Container = styled.div`
+  &.close {
+    animation: fadeout 0.2s !important;
+    -moz-animation: fadeout 0.2s !important; /* Firefox */
+    -webkit-animation: fadeout 0.2s !important; /* Safari and Chrome */
+    -o-animation: fadeout 0.2s !important; /* Opera */
+  }
   &.openModal {
     position: fixed;
     height: 100%;
@@ -22,6 +28,10 @@ const Container = styled.div`
     padding: 1em;
     box-sizing: border-box;
     overflow-y: auto;
+    animation: fadein 0.2s;
+    -moz-animation: fadein 0.2s; /* Firefox */
+    -webkit-animation: fadein 0.2s; /* Safari and Chrome */
+    -o-animation: fadein 0.2s; /* Opera */
   }
 `;
 
@@ -54,6 +64,7 @@ const Header = styled.header`
   font-size: 0.75em;
   overflow-x: scroll;
   margin-bottom: 0.375rem;
+  -webkit-overflow-scrolling: touch;
   div {
     border-radius: 0.5em;
     width: 4.8em;
@@ -72,12 +83,14 @@ const Header = styled.header`
     &.on {
       border: 0.01em solid #727272c5;
       background-color: #fff;
+      box-shadow: 0.1em 0.2em 0.5em 0px rgb(0 0 0 / 5%);
     }
   }
 `;
 
 export default function Modal(props: props): ReactElement {
   const {open, close, header, items} = props;
+  const [isOpen, setIsOpen] = useState(false);
 
   // header object 의 value 값으로 내림차순 정렬
   const sortableHeader = Object.entries(header)
@@ -87,9 +100,20 @@ export default function Modal(props: props): ReactElement {
 
   const city = DAILY_CONFIREMD_CITY;
 
+  useEffect(() => {
+    if (!open) {
+      document.querySelector('.openModal')?.classList.toggle('close');
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 150);
+    } else {
+      setIsOpen(true);
+    }
+  }, [open]);
+
   return (
-    <Container className={open ? 'openModal modal' : 'modal'}>
-      {open ? (
+    <Container className={isOpen ? 'openModal' : ''}>
+      {isOpen ? (
         <section>
           <Title>
             <div className="left"></div>
