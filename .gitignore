@@ -25,3 +25,6 @@ yarn-error.log*
 .env
 .idea/
 package-lock.json
+
+# mock, msw
+src/mockServiceWorker.js
