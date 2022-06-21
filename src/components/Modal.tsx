@@ -3,6 +3,7 @@ import modalItems from 'interfaces/modalItems.interface';
 import {DAILY_CONFIREMD_CITY} from '../constants';
 import React, {ReactElement} from 'react';
 import styled from 'styled-components';
+import {getDiffDay} from 'utils/common';
 
 type props = {
   open: boolean,
@@ -55,7 +56,7 @@ export default function Modal(props: props): ReactElement {
               items.map((item, index) => {
                 return (
                   <div key={index}>
-                    {city[item.cityId].name} {city[item.cityId][item.guId] ? `${city[item.cityId][item.guId]} ` : ''}
+                    {getDiffDay(item.datetime)}일 전 {city[item.cityId].name} {city[item.cityId][item.guId] ? `${city[item.cityId][item.guId]} ` : ''}
                     {item.cases.toLocaleString()}명 추가 확진
                   </div>
                 );

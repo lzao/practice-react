@@ -17,6 +17,7 @@ const Table = styled.table`
 
   th {
     color: #ffffff;
+    vertical-align: middle;
     &:nth-child(1) {
       width: 10%;
     }
@@ -28,6 +29,10 @@ const Table = styled.table`
     &:nth-child(5) {
       width: 15%;
     }
+  }
+
+  td {
+    vertical-align: middle;
   }
 `;
 
