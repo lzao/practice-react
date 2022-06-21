@@ -81,9 +81,13 @@ const Header = styled.header`
       margin-left: 0;
     }
     &.on {
-      border: 0.01em solid #727272c5;
+      border: 0.01em solid #dadada;
       background-color: #fff;
       box-shadow: 0.1em 0.2em 0.5em 0px rgb(0 0 0 / 5%);
+      animation: fadein 0.5s;
+      -moz-animation: fadein 0.5s; /* Firefox */
+      -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+      -o-animation: fadein 0.5s; /* Opera */
     }
   }
 `;
@@ -139,6 +143,7 @@ const FooterCloseButton = styled.button`
 export default function Modal(props: props): ReactElement {
   const {open, close, header, items} = props;
   const [isOpen, setIsOpen] = useState(false);
+  const city = DAILY_CONFIREMD_CITY;
 
   // header object 의 value 값으로 내림차순 정렬
   const sortableHeader = Object.entries(header)
@@ -146,7 +151,11 @@ export default function Modal(props: props): ReactElement {
     .reduce((r, [k, v]) => ({...r, [k]: v}), {});
   const headerKeys = Object.keys(sortableHeader);
 
-  const city = DAILY_CONFIREMD_CITY;
+  // 상단 header 도시 버튼 클릭 시 버튼의 스타일이 활성화되고 리스트가 변경된다.
+  const clickCity = (e: React.MouseEvent<HTMLDivElement>) => {
+    document.querySelector('.header-btn.on')?.classList.remove('on');
+    e.currentTarget.classList.add('on');
+  };
 
   useEffect(() => {
     if (!open) {
@@ -181,7 +190,7 @@ export default function Modal(props: props): ReactElement {
             ) : (
               headerKeys.map((item, index) => {
                 return (
-                  <div key={index} className={index == 0 ? 'on' : ''}>
+                  <div key={index} className={index == 0 ? 'header-btn on' : 'header-btn'} onClick={clickCity}>
                     {item} <strong>{header[item]}</strong>
                   </div>
                 );
