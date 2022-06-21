@@ -88,6 +88,54 @@ const Header = styled.header`
   }
 `;
 
+const Items = styled.main``;
+
+const Item = styled.div`
+  display: flex;
+  padding: 1.5em 0;
+  border-top: 1px solid #ededed;
+  font-size: 0.8em;
+`;
+
+const BellIcon = styled.svg`
+  width: 1em;
+  height: 1em;
+  padding-right: 0.5em;
+  position: relative;
+  top: 2px;
+`;
+
+const Time = styled.div`
+  color: #868686;
+  flex-grow: 1;
+  font-size: 0.9em;
+`;
+
+const Contents = styled.div`
+  flex-grow: 4;
+  flex-shrink: 0;
+  flex-basis: 30%;
+`;
+
+const City = styled.span`
+  font-weight: bold;
+`;
+
+const Cases = styled.span`
+  font-weight: 100;
+  color: #7f7f7f;
+  font-size: 0.925em;
+`;
+
+const FooterCloseButton = styled.button`
+  width: 100%;
+  padding: 1em;
+  background-color: #000000;
+  border: none;
+  color: #fff;
+  border-radius: 0.5em;
+`;
+
 export default function Modal(props: props): ReactElement {
   const {open, close, header, items} = props;
   const [isOpen, setIsOpen] = useState(false);
@@ -140,24 +188,37 @@ export default function Modal(props: props): ReactElement {
               })
             )}
           </Header>
-          <main>
+          <Items>
             {!items ? (
               <div>리스트가 없습니다.</div>
             ) : (
               items.map((item, index) => {
                 return (
-                  <div key={index}>
-                    {getDiffDay(item.datetime)}일 전 {city[item.cityId].name} {city[item.cityId][item.guId] ? `${city[item.cityId][item.guId]} ` : ''}
-                    {item.cases.toLocaleString()}명 추가 확진
-                  </div>
+                  <Item key={index}>
+                    <Time>
+                      <BellIcon xmlns="http://www.w3.org/2000/svg" width="12" height="12" stroke-width="1" viewBox="0 0 9.176 10.083" stroke="#868686">
+                        <g id="Icon_feather-bell" data-name="Icon feather-bell" transform="translate(-4 -2.5)">
+                          <path id="Path_1" data-name="Path 1" d="M11.313,5.725a2.725,2.725,0,0,0-5.451,0C5.863,8.9,4.5,9.813,4.5,9.813h8.176S11.313,8.9,11.313,5.725" fill="none"></path>
+                          <path id="Path_2" data-name="Path 2" d="M16.977,31.5a.908.908,0,0,1-1.572,0" transform="translate(-7.603 -19.87)" fill="none"></path>
+                        </g>
+                      </BellIcon>
+                      {getDiffDay(item.datetime)}일 전
+                    </Time>
+                    <Contents>
+                      <City>
+                        {city[item.cityId].name} {city[item.cityId][item.guId] ? `${city[item.cityId][item.guId]} ` : ''}
+                      </City>
+                      <Cases>{item.cases.toLocaleString()}명 추가 확진</Cases>
+                    </Contents>
+                  </Item>
                 );
               })
             )}
-          </main>
+          </Items>
           <footer>
-            <button className="close" onClick={close}>
-              close
-            </button>
+            <FooterCloseButton type="button" className="close" onClick={close}>
+              닫기
+            </FooterCloseButton>
           </footer>
         </section>
       ) : null}
