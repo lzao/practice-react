@@ -142,6 +142,7 @@ const FooterCloseButton = styled.button`
 
 export default function Modal(props: props): ReactElement {
   const {open, close, header, items} = props;
+  const [modalItems, setModalItems] = useState<modalItems[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const city = DAILY_CONFIREMD_CITY;
 
@@ -155,6 +156,13 @@ export default function Modal(props: props): ReactElement {
   const clickCity = (e: React.MouseEvent<HTMLDivElement>) => {
     document.querySelector('.header-btn.on')?.classList.remove('on');
     e.currentTarget.classList.add('on');
+    const header = e.currentTarget.innerHTML;
+    const headerKey = e.currentTarget.innerHTML.substring(0, header.indexOf(' '));
+    if (headerKey === '전체') {
+      setModalItems(items);
+    } else {
+      setModalItems(items.filter(item => city[item.cityId].name === headerKey));
+    }
   };
 
   useEffect(() => {
@@ -165,8 +173,9 @@ export default function Modal(props: props): ReactElement {
       }, 150);
     } else {
       setIsOpen(true);
+      setModalItems(items);
     }
-  }, [open]);
+  }, [open, items]);
 
   return (
     <Container className={isOpen ? 'openModal' : ''}>
@@ -198,10 +207,10 @@ export default function Modal(props: props): ReactElement {
             )}
           </Header>
           <Items>
-            {!items ? (
+            {!modalItems ? (
               <div>리스트가 없습니다.</div>
             ) : (
-              items.map((item, index) => {
+              modalItems.map((item, index) => {
                 return (
                   <Item key={index}>
                     <Time>
