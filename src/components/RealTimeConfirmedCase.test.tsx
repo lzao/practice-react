@@ -26,17 +26,15 @@ const mockConfirmedCaseList: realTimeConfirmedCase[] = [
   },
 ];
 
-beforeEach(() => {
-  const props = {
-    openModal: jest.fn(),
-    setHeader: jest.fn(),
-    setModalItems: jest.fn(),
-  };
-  render(<RealTimeConfirmedCase {...props} />);
-});
+const props = {
+  openModal: jest.fn(),
+  setHeader: jest.fn(),
+  setModalItems: jest.fn(),
+};
 
 test('코로나 확진자가 없을 경우 "확진된 사람이 없습니다." 라는 문구가 나타납니다.', async () => {
   server.use(taskRealTimeConfirmedCaseEmpty);
+  render(<RealTimeConfirmedCase {...props} />);
 
   const displayed = await waitFor(() => screen.getByText('확진된 사람이 없습니다.'), {
     timeout: 500,
@@ -46,6 +44,7 @@ test('코로나 확진자가 없을 경우 "확진된 사람이 없습니다." �
 
 test('실시간 코로나 확진자 수의 알람이 있을 경우 하나씩 알람 내용을 보여줍니다.', async () => {
   server.use(taskRealTimeConfirmedCase);
+  render(<RealTimeConfirmedCase {...props} />);
 
   const mockConfirmedCaseListCount = mockConfirmedCaseList.length;
   for (let index = 0; index < mockConfirmedCaseListCount; index++) {
