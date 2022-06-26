@@ -104,15 +104,13 @@ export default function RealTimeConfirmedCase(props: props): ReactElement {
     });
   }
 
-
-
   const clickModal = () => {
     getModalList();
     props.openModal();
   }
 
   return (
-    <Container onClick={clickModal}>
+    <Container onClick={clickModal} role="real">
       {!item ? (
         <div>확진된 사람이 없습니다.</div>
       ) : (

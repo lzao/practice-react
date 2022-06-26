@@ -178,7 +178,7 @@ export default function Modal(props: props): ReactElement {
   }, [open, items]);
 
   return (
-    <Container className={isOpen ? 'openModal' : ''}>
+    <Container className={isOpen ? 'openModal' : ''} role="modal">
       {isOpen ? (
         <section>
           <Title>
@@ -199,7 +199,7 @@ export default function Modal(props: props): ReactElement {
             ) : (
               headerKeys.map((item, index) => {
                 return (
-                  <div key={index} className={index == 0 ? 'header-btn on' : 'header-btn'} onClick={clickCity}>
+                  <div role={item} key={index} className={index == 0 ? 'header-btn on' : 'header-btn'} onClick={clickCity}>
                     {item} <strong>{header[item]}</strong>
                   </div>
                 );
@@ -212,7 +212,7 @@ export default function Modal(props: props): ReactElement {
             ) : (
               modalItems.map((item, index) => {
                 return (
-                  <Item key={index}>
+                  <Item key={index} role="item">
                     <Time>
                       <BellIcon xmlns="http://www.w3.org/2000/svg" width="12" height="12" stroke-width="1" viewBox="0 0 9.176 10.083" stroke="#868686">
                         <g id="Icon_feather-bell" data-name="Icon feather-bell" transform="translate(-4 -2.5)">
