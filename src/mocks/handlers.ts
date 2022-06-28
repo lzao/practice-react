@@ -394,4 +394,17 @@ export const taskRealTimeConfirmedCaseEmpty = rest.get('/openapi/test', (req, re
   return res(ctx.status(200), ctx.json(null));
 });
 
-export const handlers = [taskHandler, taskRealTimeConfirmedCase];
+export const taskLive = rest.get('/region/live', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json({
+      today: 30260,
+      yesterday: 12257,
+      weekAgo: 41937,
+      twoWeeksAgo: 43524,
+      monthAgo: 103780,
+    }),
+  );
+});
+
+export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskLive];
