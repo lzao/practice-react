@@ -1,11 +1,8 @@
 import {render, screen, waitFor} from '@testing-library/react';
-import {taskStat} from 'mocks/handlers';
 import React from 'react';
-import server from 'setupTests';
 import Stat from './Stat';
 
 test('전체 코로나 현황을 보여줍니다', async () => {
-  server.use(taskStat);
   render(<Stat />);
   const confirmedDisplayed = await waitFor(() => screen.getByRole('confirmed'));
   expect(confirmedDisplayed.classList.contains('red')).toBe(true);
