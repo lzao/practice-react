@@ -22,6 +22,7 @@ const Today = styled.div`
   color: #464d52;
   flex-grow: 0;
   margin: 0.2rem 0.8rem 0;
+  line-height: 1.5;
   div.today-count {
     font-weight: bold;
     font-size: 1.75rem;
@@ -37,6 +38,10 @@ const Ago = styled.div`
     align-items: center;
     &:first-child {
       margin-right: 0.3rem;
+      flex-grow: 0;
+    }
+    &:last-child {
+      flex-grow: 1;
     }
     span.title {
       min-width: 3.4rem;
@@ -66,10 +71,6 @@ const Ago = styled.div`
           content: ' ▼';
         }
       }
-    }
-    &:last-child {
-      flex-grow: 1;
-      margin-top: 0.45rem;
     }
   }
 `;
