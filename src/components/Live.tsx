@@ -75,44 +75,50 @@ const Ago = styled.div`
 `;
 
 export default function Live(): ReactElement {
-  const {today, yesterday, weekAgo, twoWeeksAgo, monthAgo} = useLive();
+  const {today, yesterday, weekAgo, twoWeeksAgo, monthAgo} = {...useLive()};
 
   return (
     <Container>
-      <Today>
-        <div className="today-title">오늘확진자</div>
-        <div className="today-count" role="today-count">
-          {today}
-        </div>
-      </Today>
-      <Ago>
-        <div className="compare">
-          <span className="title">어제</span>
-          <span className={yesterday.class + ' count'} role="yesterday-count">
-            {yesterday.case}
-          </span>
-        </div>
-        <div className="compare">
-          <span className="title">1주전</span>
-          <span className={weekAgo.class + ' count'} role="weekAgo-count">
-            {weekAgo.case}
-          </span>
-        </div>
-      </Ago>
-      <Ago>
-        <div className="compare">
-          <span className="title">2주전</span>
-          <span className={twoWeeksAgo.class + ' count'} role="twoWeeksAgo-count">
-            {twoWeeksAgo.case}
-          </span>
-        </div>
-        <div className="compare">
-          <span className="title">4주전</span>
-          <span className={monthAgo.class + ' count'} role="monthAgo-count">
-            {monthAgo.case}
-          </span>
-        </div>
-      </Ago>
+      {!today || !yesterday || !weekAgo || !twoWeeksAgo || !monthAgo ? (
+        <div>확진된 사람이 없습니다.</div>
+      ) : (
+        <>
+          <Today>
+            <div className="today-title">오늘확진자</div>
+            <div className="today-count" role="today">
+              {today}
+            </div>
+          </Today>
+          <Ago>
+            <div className="compare">
+              <span className="title">어제</span>
+              <span className={yesterday.class + ' count'} role="yesterday">
+                {yesterday.case}
+              </span>
+            </div>
+            <div className="compare">
+              <span className="title">1주전</span>
+              <span className={weekAgo.class + ' count'} role="weekAgo">
+                {weekAgo.case}
+              </span>
+            </div>
+          </Ago>
+          <Ago>
+            <div className="compare">
+              <span className="title">2주전</span>
+              <span className={twoWeeksAgo.class + ' count'} role="twoWeeksAgo">
+                {twoWeeksAgo.case}
+              </span>
+            </div>
+            <div className="compare">
+              <span className="title">4주전</span>
+              <span className={monthAgo.class + ' count'} role="monthAgo">
+                {monthAgo.case}
+              </span>
+            </div>
+          </Ago>
+        </>
+      )}
     </Container>
   );
 }
