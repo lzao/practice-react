@@ -1,4 +1,8 @@
+import axios from 'axios';
+import { DAILY_CONFIREMD_CITY } from '../constants';
 import useConfirmedCaseInRealTime from 'hooks/useConfirmedCaseInRealTime';
+import modalHeader from 'interfaces/modalHeader.interface';
+import modalItems from 'interfaces/modalItems.interface';
 import realTimeConfirmedCase from 'interfaces/realTimeConfirmedCase.interface';
 import React, {ReactElement, useEffect, useRef, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
@@ -16,7 +20,6 @@ const BoxFadeIn = keyframes`
 const Container = styled.ul`
   border: 1px solid #e6e6ea;
   box-shadow: rgb(0 0 0 / 4%) 0px 2px 10px 0px;
-  border-radius: 0.725em;
   padding: 1em;
   margin-bottom: 3em;
   background: linear-gradient(180deg, #f7f7f7, transparent);
@@ -49,7 +52,13 @@ const MoreNotifyButton = styled.svg`
   height: 1.3em;
 `;
 
-export default function RealTimeConfirmedCase(): ReactElement {
+type props = {
+  openModal: () => void,
+  setHeader: (p: modalHeader) => void,
+  setModalItems: (p: modalItems[]) => void,
+}
+
+export default function RealTimeConfirmedCase(props: props): ReactElement {
   const items = useConfirmedCaseInRealTime();
   const [item, setItem] = useState<realTimeConfirmedCase>();
   const confirmedCaseList = useRef(0);
@@ -76,8 +85,32 @@ export default function RealTimeConfirmedCase(): ReactElement {
     }
   })
 
+  async function getModalList() {
+    await axios.get<modalItems[]>('/region/daily').then(response => {
+      props.setModalItems(response.data);
+      const header: modalHeader = {};
+
+      // 전체 알림 수
+      header[DAILY_CONFIREMD_CITY[1000].name] = response.data.length;
+
+      response.data.map(item => {
+        if (header[DAILY_CONFIREMD_CITY[item.cityId].name]) {
+          header[DAILY_CONFIREMD_CITY[item.cityId].name]++;
+        } else {
+          header[DAILY_CONFIREMD_CITY[item.cityId].name] = 1;
+        }
+      });
+      props.setHeader(header);
+    });
+  }
+
+  const clickModal = () => {
+    getModalList();
+    props.openModal();
+  }
+
   return (
-    <Container>
+    <Container onClick={clickModal} role="real">
       {!item ? (
         <div>확진된 사람이 없습니다.</div>
       ) : (
