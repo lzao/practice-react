@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import Live from 'components/Live';
-=======
 import Modal from 'components/Modal';
->>>>>>> origin/master
 import RealTimeConfirmedCase from 'components/RealTimeConfirmedCase';
 import modalHeader from 'interfaces/modalHeader.interface';
 import modalItems from 'interfaces/modalItems.interface';
