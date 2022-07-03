@@ -1,6 +1,6 @@
 import {rest} from 'msw';
 
-const taskHandler = rest.get('/openapi/service/rest/Covid19/getCovid19SidoInfStateJson', (req, res, ctx) => {
+const taskHandler = rest.get('/region/province', (req, res, ctx) => {
   return res(
     ctx.status(200),
     ctx.delay(10),
@@ -344,7 +344,7 @@ const taskHandler = rest.get('/openapi/service/rest/Covid19/getCovid19SidoInfSta
   );
 });
 
-export const taskErrorHandler = rest.get('/openapi/service/rest/Covid19/getCovid19SidoInfStateJson', (req, res, ctx) => {
+export const taskErrorHandler = rest.get('/region/province', (req, res, ctx) => {
   return res(
     ctx.status(200),
     ctx.delay(10),
@@ -364,7 +364,7 @@ export const taskErrorHandler = rest.get('/openapi/service/rest/Covid19/getCovid
   );
 });
 
-export const taskRealTimeConfirmedCase = rest.get('/openapi/test', (req, res, ctx) => {
+export const taskRealTimeConfirmedCase = rest.get('/region/real', (req, res, ctx) => {
   return res(
     ctx.status(200),
     ctx.json([
@@ -390,7 +390,7 @@ export const taskRealTimeConfirmedCase = rest.get('/openapi/test', (req, res, ct
   );
 });
 
-export const taskRealTimeConfirmedCaseEmpty = rest.get('/openapi/test', (req, res, ctx) => {
+export const taskRealTimeConfirmedCaseEmpty = rest.get('/region/real', (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(null));
 });
 
@@ -407,4 +407,282 @@ export const taskLive = rest.get('/region/live', (req, res, ctx) => {
   );
 });
 
-export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskLive];
+export const taskDailyConfirmedCase = rest.get('/region/daily', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json([
+      {
+        cityId: 8,
+        guId: 21,
+        cases: 146,
+        datetime: '2022/05/16 19:03:30',
+      },
+      {
+        cityId: 8,
+        guId: -1,
+        cases: 4984,
+        datetime: '2022/05/16 18:46:49',
+      },
+      {
+        cityId: 13,
+        guId: -1,
+        cases: 1542,
+        datetime: '2022/05/16 18:46:42',
+      },
+      {
+        cityId: 2,
+        guId: -1,
+        cases: 1417,
+        datetime: '2022/05/16 18:44:33',
+      },
+      {
+        cityId: 14,
+        guId: -1,
+        cases: 1285,
+        datetime: '2022/05/16 18:43:26',
+      },
+      {
+        cityId: 9,
+        guId: -1,
+        cases: 1352,
+        datetime: '2022/05/16 18:43:22',
+      },
+      {
+        cityId: 11,
+        guId: -1,
+        cases: 1328,
+        datetime: '2022/05/16 18:39:45',
+      },
+      {
+        cityId: 7,
+        guId: -1,
+        cases: 46,
+        datetime: '2022/05/16 18:34:56',
+      },
+      {
+        cityId: 4,
+        guId: -1,
+        cases: 830,
+        datetime: '2022/05/16 18:33:17',
+      },
+      {
+        cityId: 15,
+        guId: -1,
+        cases: 1149,
+        datetime: '2022/05/16 18:32:15',
+      },
+      {
+        cityId: 0,
+        guId: -1,
+        cases: 3025,
+        datetime: '2022/05/16 18:30:12',
+      },
+      {
+        cityId: 6,
+        guId: 0,
+        cases: 129,
+        datetime: '2022/05/16 18:29:45',
+      },
+      {
+        cityId: 6,
+        guId: 1,
+        cases: 274,
+        datetime: '2022/05/16 18:29:14',
+      },
+      {
+        cityId: 6,
+        guId: 4,
+        cases: 139,
+        datetime: '2022/05/16 18:27:40',
+      },
+      {
+        cityId: 16,
+        guId: -1,
+        cases: 266,
+        datetime: '2022/05/16 18:27:25',
+      },
+      {
+        cityId: 5,
+        guId: -1,
+        cases: 827,
+        datetime: '2022/05/16 18:27:20',
+      },
+      {
+        cityId: 10,
+        guId: -1,
+        cases: 212,
+        datetime: '2022/05/16 18:27:06',
+      },
+      {
+        cityId: 6,
+        guId: 2,
+        cases: 125,
+        datetime: '2022/05/16 18:26:38',
+      },
+      {
+        cityId: 6,
+        guId: 3,
+        cases: 167,
+        datetime: '2022/05/16 18:23:45',
+      },
+      {
+        cityId: 8,
+        guId: -1,
+        cases: 1045,
+        datetime: '2022/05/16 17:27:35',
+      },
+      {
+        cityId: 0,
+        guId: -1,
+        cases: 1072,
+        datetime: '2022/05/16 17:23:22',
+      },
+      {
+        cityId: 3,
+        guId: -1,
+        cases: 1748,
+        datetime: '2022/05/16 16:54:49',
+      },
+      {
+        cityId: 12,
+        guId: -1,
+        cases: 1706,
+        datetime: '2022/05/16 16:23:04',
+      },
+      {
+        cityId: 13,
+        guId: 14,
+        cases: 21,
+        datetime: '2022/05/16 16:15:30',
+      },
+      {
+        cityId: 13,
+        guId: 5,
+        cases: 16,
+        datetime: '2022/05/16 16:10:30',
+      },
+      {
+        cityId: 13,
+        guId: 3,
+        cases: 179,
+        datetime: '2022/05/16 16:05:30',
+      },
+      {
+        cityId: 11,
+        guId: 8,
+        cases: 33,
+        datetime: '2022/05/16 16:04:30',
+      },
+      {
+        cityId: 13,
+        guId: 12,
+        cases: 21,
+        datetime: '2022/05/16 15:47:31',
+      },
+      {
+        cityId: 8,
+        guId: -1,
+        cases: 1042,
+        datetime: '2022/05/16 15:31:53',
+      },
+      {
+        cityId: 1,
+        guId: -1,
+        cases: 1177,
+        datetime: '2022/05/16 14:30:35',
+      },
+      {
+        cityId: 8,
+        guId: -1,
+        cases: 1252,
+        datetime: '2022/05/16 13:37:35',
+      },
+      {
+        cityId: 0,
+        guId: -1,
+        cases: 1012,
+        datetime: '2022/05/16 12:46:57',
+      },
+      {
+        cityId: 10,
+        guId: 0,
+        cases: 210,
+        datetime: '2022/05/16 10:32:30',
+      },
+      {
+        cityId: 11,
+        guId: 9,
+        cases: 33,
+        datetime: '2022/05/16 10:28:30',
+      },
+      {
+        cityId: 8,
+        guId: 28,
+        cases: 46,
+        datetime: '2022/05/16 10:26:00',
+      },
+      {
+        cityId: 8,
+        guId: 30,
+        cases: 271,
+        datetime: '2022/05/16 10:08:00',
+      },
+      {
+        cityId: 13,
+        guId: 16,
+        cases: 3,
+        datetime: '2022/05/16 10:02:00',
+      },
+      {
+        cityId: 13,
+        guId: 9,
+        cases: 13,
+        datetime: '2022/05/16 09:48:00',
+      },
+      {
+        cityId: 14,
+        guId: 10,
+        cases: 7,
+        datetime: '2022/05/16 09:33:30',
+      },
+      {
+        cityId: 9,
+        guId: 10,
+        cases: 8,
+        datetime: '2022/05/16 09:31:30',
+      },
+      {
+        cityId: 14,
+        guId: 8,
+        cases: 20,
+        datetime: '2022/05/16 09:00:30',
+      },
+      {
+        cityId: 13,
+        guId: 15,
+        cases: 6,
+        datetime: '2022/05/16 09:00:30',
+      },
+      {
+        cityId: 14,
+        guId: 3,
+        cases: 35,
+        datetime: '2022/05/16 08:54:30',
+      },
+      {
+        cityId: 14,
+        guId: 5,
+        cases: 26,
+        datetime: '2022/05/16 08:46:30',
+      },
+      {
+        cityId: 9,
+        guId: 12,
+        cases: 15,
+        datetime: '2022/05/16 08:26:00',
+      },
+    ]),
+  );
+});
+
+export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskDailyConfirmedCase, taskLive];
