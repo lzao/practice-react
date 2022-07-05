@@ -394,6 +394,19 @@ export const taskRealTimeConfirmedCaseEmpty = rest.get('/region/real', (req, res
   return res(ctx.status(200), ctx.json(null));
 });
 
+export const taskLive = rest.get('/region/live', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json({
+      today: 30260,
+      yesterday: 12257,
+      weekAgo: 41937,
+      twoWeeksAgo: 43524,
+      monthAgo: 103780,
+    }),
+  );
+});
+
 export const taskDailyConfirmedCase = rest.get('/region/daily', (req, res, ctx) => {
   return res(
     ctx.status(200),
@@ -672,4 +685,4 @@ export const taskDailyConfirmedCase = rest.get('/region/daily', (req, res, ctx) 
   );
 });
 
-export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskDailyConfirmedCase];
+export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskDailyConfirmedCase, taskLive];

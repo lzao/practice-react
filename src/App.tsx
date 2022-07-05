@@ -1,3 +1,4 @@
+import Live from 'components/Live';
 import Modal from 'components/Modal';
 import RealTimeConfirmedCase from 'components/RealTimeConfirmedCase';
 import modalHeader from 'interfaces/modalHeader.interface';
@@ -23,6 +24,7 @@ export default function App(): ReactElement {
 
   return (
     <>
+      <Live />
       <Modal open={modalOpen} close={closeModal} header={header} items={modalItem} />
       <RealTimeConfirmedCase openModal={openModal} setHeader={setHeader} setModalItems={setModalItems} />
       <Province />
