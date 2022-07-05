@@ -42,6 +42,7 @@ const Ago = styled.div`
     }
     &:last-child {
       flex-grow: 1;
+      margin-top: 0.5rem;
     }
     span.title {
       min-width: 3.4rem;
