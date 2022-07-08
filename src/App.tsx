@@ -1,6 +1,7 @@
 import Live from 'components/Live';
 import Modal from 'components/Modal';
 import RealTimeConfirmedCase from 'components/RealTimeConfirmedCase';
+import Stat from 'components/Stat';
 import modalHeader from 'interfaces/modalHeader.interface';
 import modalItems from 'interfaces/modalItems.interface';
 import React, {ReactElement, useState} from 'react';
@@ -24,6 +25,7 @@ export default function App(): ReactElement {
 
   return (
     <>
+      <Stat />
       <Live />
       <Modal open={modalOpen} close={closeModal} header={header} items={modalItem} />
       <RealTimeConfirmedCase openModal={openModal} setHeader={setHeader} setModalItems={setModalItems} />

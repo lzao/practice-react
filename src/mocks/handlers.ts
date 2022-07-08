@@ -685,4 +685,16 @@ export const taskDailyConfirmedCase = rest.get('/region/daily', (req, res, ctx) 
   );
 });
 
-export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskDailyConfirmedCase, taskLive];
+export const taskStat = rest.get('/region/stat', (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json({
+      confirmed: [17795357, 13296],
+      deceased: [23745, 35],
+      confirmedCritical: [345, 7],
+      hospitalised: [157, -116],
+    }),
+  );
+});
+
+export const handlers = [taskHandler, taskRealTimeConfirmedCase, taskDailyConfirmedCase, taskLive, taskStat];
