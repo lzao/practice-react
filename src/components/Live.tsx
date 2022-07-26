@@ -15,7 +15,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   font-size: 0.75rem;
-  margin: 1rem 0;
+  margin-top: 1rem;
 `;
 const Today = styled.div`
   text-align: center;
@@ -80,7 +80,7 @@ export default function Live(): ReactElement {
   const {today, yesterday, weekAgo, twoWeeksAgo, monthAgo} = {...useLive()};
 
   return (
-    <Container>
+    <Container className="component">
       {!today || !yesterday || !weekAgo || !twoWeeksAgo || !monthAgo ? (
         <div>확진된 사람이 없습니다.</div>
       ) : (

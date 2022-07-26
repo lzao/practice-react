@@ -9,7 +9,8 @@ import styled, {keyframes} from 'styled-components';
 
 const BoxFadeIn = keyframes`
   from {
-      transform: translate3d(0,10px,0)
+      transform: translate3d(0,10px,0);
+      opacity: 0;
   }
   to {
       transform: translate3d(0,0,0);
@@ -18,12 +19,10 @@ const BoxFadeIn = keyframes`
 `;
 
 const Container = styled.ul`
-  border: 1px solid #e6e6ea;
-  box-shadow: rgb(0 0 0 / 4%) 0px 2px 10px 0px;
-  padding: 1em;
-  margin-bottom: 3em;
-  background: linear-gradient(180deg, #f7f7f7, transparent);
+  padding: 1.5em 1em;
+  margin-bottom: 1.5em;
   font-size: 0.75em;
+  background: linear-gradient(0deg,#ffffff,transparent);
 `;
 
 const ListContainer = styled.li`
@@ -110,7 +109,7 @@ export default function RealTimeConfirmedCase(props: props): ReactElement {
   }
 
   return (
-    <Container onClick={clickModal} role="real">
+    <Container onClick={clickModal} role="real" className="component">
       {!item ? (
         <div>확진된 사람이 없습니다.</div>
       ) : (

@@ -95,7 +95,9 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 } 
 body {
+	margin:0 !important;
 	line-height: 1;
+	background-color: #eaeaea;
 }
 ol, ul {
 	list-style: none;
@@ -110,4 +112,9 @@ blockquote:before, blockquote:after, q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.component {
+	background-color: #fff;
+	padding: 1rem 0;
 }

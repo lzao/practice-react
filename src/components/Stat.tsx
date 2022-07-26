@@ -17,6 +17,8 @@ const Stats = styled.div`
   color: #464d52;
   display: flex;
   justify-content: space-around;
+  background-color: #fff;
+  padding: 1rem 0;
 `;
 const StatsItem = styled.div`
   text-align: center;
