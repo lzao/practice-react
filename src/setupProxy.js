@@ -8,7 +8,7 @@ module.exports = app => {
   app.use(
     '/region',
     createProxyMiddleware({
-      target: 'http://' + process.env.REACT_APP_API_HOST,
+      target: `http://${process.env.REACT_APP_API_DOMAIN}`,
       changeOrigin: true,
     }),
   );
