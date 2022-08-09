@@ -1,4 +1,4 @@
-export const API_DOMAIN = `http://${process.env.REACT_APP_API_DOMAIN}`;
+export const API_DOMAIN = `https://${process.env.REACT_APP_API_DOMAIN}`;
 type city = {
   [index: number]: {
     name: string,
