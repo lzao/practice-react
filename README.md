@@ -13,9 +13,8 @@
 CLI 기준으로 설명합니다.
 1. cd ~/practice-react ## 본인 로컬에 다운로드 받은 프로젝트 위치로 이동합니다. 
 2. .env.example 파일을 복사하여 .env 파일을 생성합니다
-    2.1 .env 파일의 REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY 값은 개발자에게 문의바랍니다.
-3 docker pull lzao/daily-corona-status:latest
-4 docker run -d -p 3000:3000 -v {document_root}:/app -e CHOKIDAR_USEPOLLING=true --name node lzao/daily-corona-status:latest
+3 docker pull lzao/daily-corona-status:1.0.0-alpine
+4 docker run -d -p 3000:3000 -v {document_root}:/app -e CHOKIDAR_USEPOLLING=true --name node lzao/daily-corona-status:1.0.0-alpine
 5 docker exec node npm install && npm start
 ```
 
@@ -24,6 +23,4 @@ https://monssosa.notion.site/VSCode-9874244804ed4e86993e4250fd7f46db
 
 ## 실행화면
 http://localhost:3000 으로 접속하여 아래 화면이 나오는 지 확인합니다.
-![5](https://user-images.githubusercontent.com/15684441/143533704-33f0952b-ae1d-4639-a3c7-29e74a33f70a.png)
-
-
+<p align="center"><img src="https://user-images.githubusercontent.com/15684441/183779614-8e362d80-e355-41fc-bed9-e6c59dbda603.png" /></p>
