@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_DOMAIN } from '../constants';
 import {liveApi, live} from 'interfaces/live.interfaces';
 import {useEffect, useState} from 'react';
 
@@ -13,7 +14,7 @@ function getCase(count: number): string {
 export default function useLive(): live | undefined {
   const [live, setLive] = useState<live>();
   async function getLive() {
-    await axios.get<liveApi>('/region/live').then(response => {
+    await axios.get<liveApi>(API_DOMAIN + '/region/live').then(response => {
       const data = response.data;
       const yesterday = data.yesterday - data.today;
       const weekAgo = data.weekAgo - data.today;

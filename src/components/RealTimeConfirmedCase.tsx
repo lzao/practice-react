@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DAILY_CONFIREMD_CITY } from '../constants';
+import { API_DOMAIN, DAILY_CONFIREMD_CITY } from '../constants';
 import useConfirmedCaseInRealTime from 'hooks/useConfirmedCaseInRealTime';
 import modalHeader from 'interfaces/modalHeader.interface';
 import modalItems from 'interfaces/modalItems.interface';
@@ -85,7 +85,7 @@ export default function RealTimeConfirmedCase(props: props): ReactElement {
   })
 
   async function getModalList() {
-    await axios.get<modalItems[]>('/region/daily').then(response => {
+    await axios.get<modalItems[]>(API_DOMAIN + '/region/daily').then(response => {
       props.setModalItems(response.data);
       const header: modalHeader = {};
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_DOMAIN } from '../constants';
 import {confirmedStatApi, confirmedStat} from 'interfaces/confirmedStat.interface';
 import {useEffect, useState} from 'react';
 
@@ -15,7 +16,7 @@ export default function useConfirmedStat(): confirmedStat | undefined {
   const [stat, setStat] = useState<confirmedStat>();
 
   async function getStat() {
-    await axios.get<confirmedStatApi>('/region/stat').then(response => {
+    await axios.get<confirmedStatApi>(API_DOMAIN + '/region/stat').then(response => {
       const data = response.data;
       setStat({
         confirmed: {

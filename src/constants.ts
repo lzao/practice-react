@@ -1,4 +1,4 @@
-export const DAILY_CORONA_STATUS_API_SERVICE_KEY = process.env.REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY;
+export const API_DOMAIN = `http://${process.env.REACT_APP_API_DOMAIN}`;
 type city = {
   [index: number]: {
     name: string,
