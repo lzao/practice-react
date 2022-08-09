@@ -7,8 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    env: # environment setting
-      REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY: ${{secrets.REACT_APP_DAILY_CORONA_STATUS_API_SERVICE_KEY}}
     steps:
      - name: Checkout source code. # 레포지토리 체크아웃
        uses: actions/checkout@master
