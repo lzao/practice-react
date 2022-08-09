@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    env: # environment setting
     steps:
       - name: Checkout source code. # 레포지토리 체크아웃
         uses: actions/checkout@master
