@@ -20,6 +20,7 @@ const Container = styled.div`
     -o-animation: fadeout 0.2s !important; /* Opera */
   }
   &.openModal {
+    top: 0;
     position: fixed;
     height: 100%;
     background-color: #fff;

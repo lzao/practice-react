@@ -1,3 +1,5 @@
+import Footer from 'components/Footer';
+import Header from 'components/Header';
 import Live from 'components/Live';
 import Modal from 'components/Modal';
 import RealTimeConfirmedCase from 'components/RealTimeConfirmedCase';
@@ -25,11 +27,13 @@ export default function App(): ReactElement {
 
   return (
     <>
+      <Header />
       <Stat />
       <Live />
       <Modal open={modalOpen} close={closeModal} header={header} items={modalItem} />
       <RealTimeConfirmedCase openModal={openModal} setHeader={setHeader} setModalItems={setModalItems} />
       <Province />
+      <Footer />
     </>
   );
 }

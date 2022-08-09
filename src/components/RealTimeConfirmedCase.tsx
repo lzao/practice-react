@@ -22,7 +22,7 @@ const Container = styled.ul`
   padding: 1.5em 1em;
   margin-bottom: 1.5em;
   font-size: 0.75em;
-  background: linear-gradient(0deg,#ffffff,transparent);
+  background: linear-gradient(0deg,#ffffff,#f2f2f2db);
 `;
 
 const ListContainer = styled.li`
@@ -75,7 +75,7 @@ export default function RealTimeConfirmedCase(props: props): ReactElement {
           confirmedCaseList.current += 1;
         }
         setItem(items[confirmedCaseList.current]);
-      }, 2000);
+      }, 4000);
   
       return(() => {
         isCalled.current = true;
