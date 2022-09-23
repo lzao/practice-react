@@ -13,6 +13,14 @@ type props = {
 };
 
 const Container = styled.div`
+
+  @media all and (min-width:1023px) { 
+    width:24vw !important;
+  } 
+
+  @media all and (min-width:768px) and (max-width:1023px) { 
+    width: 54vw !important;
+  } 
   &.close {
     animation: fadeout 0.2s !important;
     -moz-animation: fadeout 0.2s !important; /* Firefox */

@@ -119,3 +119,34 @@ table {
 	background-color: #fff;
 	padding: 1rem 0;
 }
+
+@media all and (min-width:1023px) { 
+	#root {
+		margin: 0 auto;
+		width: 23vw;
+		border: 1px solid #ddd;
+		border-top: none;
+		border-bottom: none;
+	}
+} 
+
+
+@media all and (min-width:768px) and (max-width:1023px) { 
+	#root {
+		margin: 0 auto;
+		width: 45vw;
+		border: 1px solid #ddd;
+		border-top: none;
+		border-bottom: none;
+	}
+} 
+
+@media all and (max-width:768px) { 
+	#root {
+		margin: 0 auto;
+		width: 75vw;
+		border: 1px solid #ddd;
+		border-top: none;
+		border-bottom: none;
+	}
+} 
