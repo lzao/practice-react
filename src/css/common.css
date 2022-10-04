@@ -140,13 +140,3 @@ table {
 		border-bottom: none;
 	}
 } 
-
-@media all and (max-width:768px) { 
-	#root {
-		margin: 0 auto;
-		width: 75vw;
-		border: 1px solid #ddd;
-		border-top: none;
-		border-bottom: none;
-	}
-} 
